@@ -60,10 +60,8 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b0f17;border-color:transparent}
 .btn.primary:hover{filter:brightness(1.08)}
 .btn svg{width:16px;height:16px}
-.nav-cta{display:none}
-@media(min-width:760px){.nav-cta{display:inline-flex;padding:7px 12px}}
-.burger{display:none}
-@media(max-width:759px){.links{display:none}}
+.nav-cta{padding:7px 12px}
+@media(max-width:759px){.links{gap:10px}.links > a:not(.nav-cta){display:none}.logo span{display:none}}
 
 /* hero */
 .hero{padding:72px 0 40px}
@@ -211,7 +209,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <a class="btn nav-cta" href="resume.pdf" target="_blank" rel="noopener"><span class="en">Resume</span><span class="ru">Резюме</span> ↗</a>
       <div class="lang"><button data-lang="en" class="on">EN</button><button data-lang="ru">RU</button></div>
     </div>
-    <div class="lang burger-lang" style="display:none"><button data-lang="en" class="on">EN</button><button data-lang="ru">RU</button></div>
   </div>
 </nav>
 
@@ -431,6 +428,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  setTimeout(function(){document.querySelectorAll('.reveal:not(.in)').forEach(function(el){el.classList.add('in')})},1500);
 })();
 </script>
 </body>
