@@ -104,7 +104,7 @@ h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-.02em}
 .about{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:start}
 @media(max-width:820px){.about{grid-template-columns:1fr}}
 .portrait{position:relative}
-.portrait img{width:100%;border-radius:16px;border:1px solid var(--line2);display:block}
+.portrait img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:1px solid var(--line2);display:block}
 .portrait .tag{position:absolute;left:14px;bottom:14px;background:rgba(11,15,23,.85);backdrop-filter:blur(8px);border:1px solid var(--line2);border-radius:10px;padding:8px 12px;font-family:var(--mono);font-size:12px;color:var(--muted)}
 .about .text p{color:var(--muted);font-size:16.5px}
 .about .text p strong{color:var(--text);font-weight:600}
@@ -267,7 +267,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="sec-head"><span class="num">01</span><h2><span class="en">About</span><span class="ru">Обо мне</span></h2></div>
     <div class="about">
       <div class="portrait reveal">
-        <img src="assets/avatar.jpg" alt="Akmaral Yerzhan" width="640" height="640">
+        <img src="assets/avatar.jpg?v=2" alt="Akmaral Yerzhan" width="900" height="900">
         <div class="tag">Astana · UTC+5</div>
       </div>
       <div class="text reveal">
