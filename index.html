@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akmaral Yerzhan — iOS Developer</title>
+<meta name="description" content="Akmaral Yerzhan — iOS developer in Astana, Kazakhstan. Swift, UIKit, Combine, Firebase. MVVM + Coordinator. Open to work.">
+<meta property="og:title" content="Akmaral Yerzhan — iOS Developer">
+<meta property="og:description" content="I build iOS apps that are meant to last. Swift · UIKit · Combine · Firebase.">
+<meta property="og:image" content="https://akmaralyrzh.github.io/assets/avatar.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1420'/%3E%3Ctext x='32' y='42' font-family='JetBrains Mono,monospace' font-size='28' font-weight='700' fill='%237c9cff' text-anchor='middle'%3EAY%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f17; --bg2:#0f1420; --panel:#121828; --line:#1f2740; --line2:#2a3352;
+  --text:#e6eaf2; --muted:#98a2b8; --dim:#6b7590;
+  --accent:#7c9cff; --accent2:#a78bfa; --swift:#f6844b; --green:#4ade80; --amber:#fbbf24;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --max:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{margin:0;line-height:1.15;letter-spacing:-.01em}
+p{margin:0 0 1em}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+.ru{display:none}
+body.lang-ru .ru{display:inline}
+body.lang-ru .en{display:none}
+body.lang-ru p.ru, body.lang-ru div.ru, body.lang-ru li.ru, body.lang-ru h1.ru, body.lang-ru h2.ru, body.lang-ru h3.ru, body.lang-ru span.block.ru{display:block}
+
+/* background grid */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(900px 500px at 15% -10%, rgba(124,156,255,.14), transparent 60%),
+  radial-gradient(700px 400px at 90% 10%, rgba(167,139,250,.10), transparent 60%),
+  var(--bg)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:linear-gradient(#000 0%,transparent 70%)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(11,15,23,.7);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.logo{font-family:var(--mono);font-weight:600;color:var(--text);display:flex;align-items:center;gap:10px}
+.logo b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b0f17;font-size:12px}
+.links{display:flex;gap:22px;align-items:center;font-size:14px}
+.links a{color:var(--muted)}
+.links a:hover{color:var(--text);text-decoration:none}
+.lang{display:flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden;font-family:var(--mono);font-size:12px}
+.lang button{background:none;border:0;color:var(--dim);padding:5px 9px;cursor:pointer;font:inherit}
+.lang button.on{background:var(--panel);color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;border:1px solid var(--line2);color:var(--text);font-weight:600;font-size:14px;background:var(--panel);transition:.15s}
+.btn:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b0f17;border-color:transparent}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn svg{width:16px;height:16px}
+.nav-cta{display:none}
+@media(min-width:760px){.nav-cta{display:inline-flex;padding:7px 12px}}
+.burger{display:none}
+@media(max-width:759px){.links{display:none}}
+
+/* hero */
+.hero{padding:72px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+.eyebrow{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(74,222,128,.15)}
+h1{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-.03em}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:18px;color:var(--muted);margin:20px 0 28px;max-width:540px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+
+/* code window */
+.code{background:var(--bg2);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(124,156,255,.06);overflow:hidden}
+.code .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--dim)}
+.code .bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.code .bar span{margin-left:8px}
+.code pre{margin:0;padding:18px 20px;font-family:var(--mono);font-size:13.2px;line-height:1.7;overflow-x:auto;color:#d5dbe8}
+.k{color:#c792ea}.t{color:#82aaff}.s{color:#c3e88d}.f{color:#ffcb6b}.c{color:#5b6580;font-style:italic}.n{color:#f78c6c}.p{color:#89ddff}
+.cursor{display:inline-block;width:8px;height:15px;background:var(--accent);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* metrics */
+.metrics{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(15,20,32,.5)}
+.metrics .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.metric{padding:22px 16px;border-left:1px solid var(--line)}
+.metric:first-child{border-left:0}
+.metric b{display:block;font-family:var(--mono);font-size:26px;font-weight:600;color:var(--text)}
+.metric span{font-size:13px;color:var(--muted)}
+@media(max-width:700px){.metrics .wrap{grid-template-columns:repeat(2,1fr)}.metric:nth-child(3){border-left:0}.metric{border-top:1px solid var(--line)}.metric:nth-child(-n+2){border-top:0}}
+
+/* sections */
+section{padding:88px 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
+.sec-head .num{font-family:var(--mono);color:var(--accent);font-size:14px}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-.02em}
+.sec-sub{color:var(--muted);max-width:640px;margin-top:10px}
+
+/* about */
+.about{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:start}
+@media(max-width:820px){.about{grid-template-columns:1fr}}
+.portrait{position:relative}
+.portrait img{width:100%;border-radius:16px;border:1px solid var(--line2);display:block}
+.portrait .tag{position:absolute;left:14px;bottom:14px;background:rgba(11,15,23,.85);backdrop-filter:blur(8px);border:1px solid var(--line2);border-radius:10px;padding:8px 12px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.about .text p{color:var(--muted);font-size:16.5px}
+.about .text p strong{color:var(--text);font-weight:600}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+@media(max-width:820px){.principles{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h4{font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.card h4 .ic{font-family:var(--mono);color:var(--accent);font-size:13px}
+.card p{font-size:14px;color:var(--muted);margin:0}
+
+/* work */
+.featured{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.featured .top{display:grid;grid-template-columns:1.1fr .9fr;gap:0}
+@media(max-width:900px){.featured .top{grid-template-columns:1fr}}
+.featured .info{padding:34px}
+.featured .kicker{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:10px}
+.featured h3{font-size:28px;font-weight:800;margin-bottom:10px}
+.featured .desc{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.chip{font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--muted);background:var(--bg2)}
+.chip.hi{color:var(--swift);border-color:rgba(246,132,75,.35)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+@media(max-width:520px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 10px;text-align:center}
+.stat b{display:block;font-family:var(--mono);font-size:20px;color:var(--text)}
+.stat span{font-size:12px;color:var(--dim)}
+.shots{background:linear-gradient(160deg,rgba(124,156,255,.10),rgba(167,139,250,.06));border-left:1px solid var(--line);padding:30px;display:flex;align-items:center;justify-content:center;gap:16px;min-height:360px}
+@media(max-width:900px){.shots{border-left:0;border-top:1px solid var(--line)}}
+.shots img{height:420px;max-height:48vw;border-radius:26px;border:1px solid var(--line2);box-shadow:0 30px 60px rgba(0,0,0,.5);background:#000}
+.shots img:nth-child(2){transform:translateY(24px)}
+.shots .placeholder{font-family:var(--mono);font-size:13px;color:var(--dim);text-align:center}
+.arch{padding:0 34px 34px}
+.arch h4{font-size:14px;color:var(--muted);font-weight:600;margin-bottom:12px;letter-spacing:.04em;text-transform:uppercase}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:13px}
+.flow .node{background:var(--bg2);border:1px solid var(--line2);border-radius:8px;padding:7px 12px}
+.flow .node.hl{border-color:var(--accent);color:var(--accent)}
+.flow .arr{color:var(--dim)}
+.highlights{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;padding:0 34px 34px;margin:0;list-style:none}
+@media(max-width:700px){.highlights{grid-template-columns:1fr}}
+.highlights li{font-size:14.5px;color:var(--muted);padding-left:18px;position:relative}
+.highlights li::before{content:"›";position:absolute;left:0;color:var(--accent);font-family:var(--mono)}
+.highlights li strong{color:var(--text);font-weight:600}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+@media(max-width:820px){.grid3{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid3{grid-template-columns:1fr}}
+.mini{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.mini h4{font-size:15px;margin-bottom:4px;font-family:var(--mono);font-weight:600}
+.mini p{font-size:13.5px;color:var(--muted);margin:0}
+.more{font-size:14px;color:var(--muted);margin-top:26px}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.stack{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.stack{grid-template-columns:1fr}}
+.stack .card h4{font-family:var(--mono);font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.stack ul{list-style:none;margin:10px 0 0;padding:0}
+.stack li{font-size:14.5px;padding:5px 0;border-top:1px solid var(--line);color:var(--text)}
+.stack li:first-child{border-top:0}
+.stack li small{color:var(--dim);font-family:var(--mono);font-size:11px;margin-left:6px}
+
+/* growth */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.road{grid-template-columns:1fr}}
+.road .card{position:relative}
+.road .st{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:6px;display:inline-block;margin-bottom:10px}
+.st.done{background:rgba(74,222,128,.12);color:var(--green)}
+.st.now{background:rgba(251,191,36,.12);color:var(--amber)}
+.st.next{background:rgba(124,156,255,.12);color:var(--accent)}
+.road ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px}
+.road li{margin:4px 0}
+.goal{margin-top:24px;background:linear-gradient(135deg,rgba(124,156,255,.12),rgba(167,139,250,.08));border:1px solid rgba(124,156,255,.3);border-radius:14px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+.goal .ic{font-family:var(--mono);color:var(--accent);font-size:20px;line-height:1}
+.goal p{margin:0;color:var(--text)}
+.goal p span{color:var(--muted)}
+
+/* contact */
+.contact{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:40px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+@media(max-width:820px){.contact{grid-template-columns:1fr;padding:28px}}
+.contact h2{margin-bottom:10px}
+.contact p{color:var(--muted)}
+.clist{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:14px}
+.clist li{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.clist li:first-child{border-top:0}
+.clist .k2{color:var(--dim);width:88px;flex:none}
+footer{padding:28px 0 40px;color:var(--dim);font-size:13px;font-family:var(--mono)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(14px);transition:.6s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top"><b>AY</b><span>akmaral.swift</span></a>
+    <div class="links">
+      <a href="#about"><span class="en">About</span><span class="ru">Обо мне</span></a>
+      <a href="#work"><span class="en">Work</span><span class="ru">Проекты</span></a>
+      <a href="#stack"><span class="en">Stack</span><span class="ru">Стек</span></a>
+      <a href="#growth"><span class="en">Growth</span><span class="ru">Рост</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="ru">Контакты</span></a>
+      <a class="btn nav-cta" href="resume.pdf" target="_blank" rel="noopener"><span class="en">Resume</span><span class="ru">Резюме</span> ↗</a>
+      <div class="lang"><button data-lang="en" class="on">EN</button><button data-lang="ru">RU</button></div>
+    </div>
+    <div class="lang burger-lang" style="display:none"><button data-lang="en" class="on">EN</button><button data-lang="ru">RU</button></div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow"><span class="dot"></span><span class="en">iOS Developer · Astana, Kazakhstan · open to work</span><span class="ru">iOS-разработчик · Астана · открыта к предложениям</span></div>
+      <h1 class="en">I build iOS apps<br>that are <em>meant to last.</em></h1>
+      <h1 class="ru">Делаю iOS-приложения,<br>которые <em>рассчитаны надолго.</em></h1>
+      <p class="lead en">Junior iOS developer with a senior mindset: architecture before UI, tests in the repo, localization from day one. Swift · UIKit · Combine · Firebase.</p>
+      <p class="lead ru">Junior iOS-разработчик с подходом сеньора: архитектура раньше интерфейса, тесты в репозитории, локализация с первого дня. Swift · UIKit · Combine · Firebase.</p>
+      <div class="cta">
+        <a class="btn primary" href="#work"><span class="en">See my work</span><span class="ru">Смотреть проект</span></a>
+        <a class="btn" href="https://github.com/AkmaralYrzh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.4 6.4-1.5 6.4-7A5.4 5.4 0 0 0 20 4.8 5 5 0 0 0 19.9 1S18.7.6 16 2.5a13.4 13.4 0 0 0-7 0C6.3.6 5.1 1 5.1 1A5 5 0 0 0 5 4.8a5.4 5.4 0 0 0-1.5 3.7c0 5.5 3.3 6.6 6.4 7a3.4 3.4 0 0 0-.9 2.6V22"/></svg>GitHub</a>
+        <a class="btn" href="mailto:dakaass@icloud.com"><span class="en">Let's connect</span><span class="ru">Написать мне</span></a>
+      </div>
+    </div>
+
+    <div class="code reveal">
+      <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>Developer.swift</span></div>
+<pre><span class="k">import</span> <span class="t">Foundation</span>
+
+<span class="k">struct</span> <span class="t">Developer</span> {
+    <span class="k">let</span> name     = <span class="s">"Akmaral Yerzhan"</span>
+    <span class="k">let</span> role     = <span class="s">"iOS Developer"</span>
+    <span class="k">let</span> based    = <span class="s">"Astana, KZ"</span>
+    <span class="k">let</span> stack    = [<span class="s">"Swift"</span>, <span class="s">"UIKit"</span>, <span class="s">"Combine"</span>, <span class="s">"Firebase"</span>]
+
+    <span class="k">var</span> level:   <span class="t">Level</span>  { .<span class="n">junior</span> }
+    <span class="k">var</span> mindset: <span class="t">Level</span>  { .<span class="n">senior</span> }
+    <span class="k">var</span> status:  <span class="t">Status</span> { .<span class="n">openToWork</span> }
+
+    <span class="k">func</span> <span class="f">ship</span>(_ feature: <span class="t">Feature</span>) <span class="k">throws</span> -> <span class="t">Release</span> {
+        <span class="k">try</span> feature
+            .<span class="f">architected</span>(as: .<span class="n">mvvm</span>(coordinator: <span class="k">true</span>))
+            .<span class="f">tested</span>()
+            .<span class="f">localized</span>([<span class="s">"kk"</span>, <span class="s">"ru"</span>, <span class="s">"en"</span>])
+            .<span class="f">release</span>()
+    }
+}<span class="cursor"></span></pre>
+    </div>
+  </div>
+</header>
+
+<div class="metrics">
+  <div class="wrap">
+    <div class="metric"><b>4 000+</b><span class="en">lines of Swift in EventHub</span><span class="ru">строк Swift в EventHub</span></div>
+    <div class="metric"><b>23</b><span class="en">unit tests (XCTest)</span><span class="ru">unit-теста (XCTest)</span></div>
+    <div class="metric"><b>3</b><span class="en">interface languages</span><span class="ru">языка интерфейса</span></div>
+    <div class="metric"><b>12</b><span class="en">screens, MVVM + Coordinator</span><span class="ru">экранов, MVVM + Coordinator</span></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><h2><span class="en">About</span><span class="ru">Обо мне</span></h2></div>
+    <div class="about">
+      <div class="portrait reveal">
+        <img src="assets/avatar.jpg" alt="Akmaral Yerzhan" width="640" height="640">
+        <div class="tag">Astana · UTC+5</div>
+      </div>
+      <div class="text reveal">
+        <p class="en">I came to iOS development after four years of operational work — <strong>aviation security at Astana International Airport</strong> and shift management in logistics at Sulpak. Those jobs taught me what many junior developers learn the hard way: checklists beat memory, edge cases are where things break, and someone always has to own the result.</p>
+        <p class="ru">В iOS-разработку я пришла после четырёх лет операционной работы — <strong>служба авиационной безопасности Международного аэропорта Астаны</strong> и руководство сменой в логистике Sulpak. Там я усвоила то, что многие джуниоры узнают на своих ошибках: чек-лист надёжнее памяти, всё ломается на граничных случаях, и за результат всегда кто-то отвечает.</p>
+        <p class="en">In 2026 I completed the iOS Development course at <strong>KODEKO</strong> and built <strong>EventHub</strong> from scratch — a full events app with two user roles, Firebase backend, Combine, MVVM + Coordinator architecture and unit tests. Defended it, took the committee's feedback and shipped every fix.</p>
+        <p class="ru">В 2026 году окончила курс iOS-разработки в <strong>КОДЕКО</strong> и с нуля собрала <strong>EventHub</strong> — полноценное приложение-афишу с двумя ролями, бэкендом на Firebase, Combine, архитектурой MVVM + Coordinator и unit-тестами. Защитила, получила замечания комиссии и закрыла каждое.</p>
+        <p class="en">By education I'm an English teacher, so Apple documentation and WWDC sessions in the original are a daily habit, not an obstacle.</p>
+        <p class="ru">По первому образованию — преподаватель английского, поэтому документация Apple и сессии WWDC в оригинале — ежедневная привычка, а не барьер.</p>
+        <div class="principles">
+          <div class="card"><h4><span class="ic">01</span><span class="en">Architecture before UI</span><span class="ru">Архитектура раньше UI</span></h4><p class="en">Coordinator owns navigation, ViewModel owns state, services own data. Screens stay thin and replaceable.</p><p class="ru">Coordinator отвечает за навигацию, ViewModel — за состояние, сервисы — за данные. Экраны тонкие и заменяемые.</p></div>
+          <div class="card"><h4><span class="ic">02</span><span class="en">Tests live in the repo</span><span class="ru">Тесты живут в репозитории</span></h4><p class="en">Models, filtering, validation and states are covered with XCTest. A fix without a test is a fix I don't trust.</p><p class="ru">Модели, фильтрация, валидация и состояния покрыты XCTest. Исправление без теста — исправление, которому я не доверяю.</p></div>
+          <div class="card"><h4><span class="ic">03</span><span class="en">Localized from day one</span><span class="ru">Локализация с первого дня</span></h4><p class="en">Kazakh, Russian and English are not an afterthought — every string goes through Localizable.strings.</p><p class="ru">Казахский, русский и английский — не «потом», каждая строка идёт через Localizable.strings.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><h2><span class="en">Work</span><span class="ru">Проекты</span></h2></div>
+    <div class="featured reveal">
+      <div class="top">
+        <div class="info">
+          <div class="kicker">// <span class="en">featured · graduation project · sole developer</span><span class="ru">главный проект · дипломный · единственный разработчик</span></div>
+          <h3>EventHub</h3>
+          <p class="desc en">An events app for Kazakhstan cities. Visitors discover events by city and category, save favorites and sign up; organizers create events with seat limits and manage their own listings.</p>
+          <p class="desc ru">Афиша мероприятий по городам Казахстана. Посетители ищут события по городу и категории, сохраняют в избранное и записываются; организаторы создают события с лимитом мест и ведут свои публикации.</p>
+          <div class="chips">
+            <span class="chip hi">Swift 5</span><span class="chip">UIKit</span><span class="chip">MVVM</span><span class="chip">Coordinator</span><span class="chip">Combine</span><span class="chip">Firebase Auth</span><span class="chip">Firestore</span><span class="chip">XCTest</span><span class="chip">SPM</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>12</b><span class="en">screens</span><span class="ru">экранов</span></div>
+            <div class="stat"><b>2</b><span class="en">user roles</span><span class="ru">роли</span></div>
+            <div class="stat"><b>3</b><span class="en">languages</span><span class="ru">языка</span></div>
+            <div class="stat"><b>23</b><span class="en">tests</span><span class="ru">теста</span></div>
+          </div>
+          <div class="cta">
+            <a class="btn primary" href="https://github.com/AkmaralYrzh/EventHub" target="_blank" rel="noopener"><span class="en">Source on GitHub</span><span class="ru">Код на GitHub</span> ↗</a>
+            <a class="btn" href="https://github.com/AkmaralYrzh/EventHub#readme" target="_blank" rel="noopener">README</a>
+          </div>
+        </div>
+        <div class="shots" id="shots">
+          <img src="assets/shot-feed.jpg" alt="EventHub — events feed" loading="lazy">
+        </div>
+      </div>
+      <div class="arch">
+        <h4><span class="en">Architecture</span><span class="ru">Архитектура</span></h4>
+        <div class="flow">
+          <span class="node hl">AppCoordinator</span><span class="arr">→</span>
+          <span class="node">ViewController</span><span class="arr">⇄</span>
+          <span class="node">ViewModel</span><span class="arr">→</span>
+          <span class="node">Combine</span><span class="arr">→</span>
+          <span class="node">AuthService / EventService</span><span class="arr">→</span>
+          <span class="node">Firebase</span>
+        </div>
+      </div>
+      <ul class="highlights">
+        <li class="en"><strong>Role-based flow:</strong> one coordinator decides onboarding → auth → visitor or organizer tab bar.</li>
+        <li class="ru"><strong>Сценарий по роли:</strong> один координатор решает: онбординг → авторизация → таб-бар посетителя или организатора.</li>
+        <li class="en"><strong>Seat limits in a Firestore transaction</strong> — sign-ups close atomically when the event is full.</li>
+        <li class="ru"><strong>Лимит мест в транзакции Firestore</strong> — запись закрывается атомарно, когда места кончились.</li>
+        <li class="en"><strong>Combine over Firebase callbacks:</strong> Future/Deferred publishers, state bound to views.</li>
+        <li class="ru"><strong>Combine поверх колбэков Firebase:</strong> Future/Deferred-паблишеры, состояние привязано к экранам.</li>
+        <li class="en"><strong>Unified list states</strong> — loading, empty and error-with-retry through one UiStateView.</li>
+        <li class="ru"><strong>Единые состояния списков</strong> — загрузка, пусто и ошибка с повтором через один UiStateView.</li>
+        <li class="en"><strong>Typed auth errors</strong> (AuthError) instead of one generic message.</li>
+        <li class="ru"><strong>Типизированные ошибки авторизации</strong> (AuthError) вместо одного общего текста.</li>
+        <li class="en"><strong>Secrets out of the repo:</strong> Firebase config is git-ignored; README explains setup.</li>
+        <li class="ru"><strong>Секреты вне репозитория:</strong> конфиг Firebase в .gitignore, установка описана в README.</li>
+      </ul>
+    </div>
+
+    <p class="more en">Practice apps built during the course — small, but each one taught a concrete UIKit skill:</p>
+    <p class="more ru">Учебные приложения курса — небольшие, но каждое закрывало конкретный навык UIKit:</p>
+    <div class="grid3">
+      <div class="mini"><h4>Calculator</h4><p class="en">Layout with stack views, state machine for operations.</p><p class="ru">Вёрстка на stack view, конечный автомат операций.</p></div>
+      <div class="mini"><h4>Xylophone</h4><p class="en">AVFoundation audio playback, IBAction wiring.</p><p class="ru">Воспроизведение звука через AVFoundation, IBAction.</p></div>
+      <div class="mini"><h4>Math Buster</h4><p class="en">Quiz game: timers, score, alerts, model separation.</p><p class="ru">Викторина: таймеры, счёт, алерты, отделение модели.</p></div>
+      <div class="mini"><h4>ProfileApp</h4><p class="en">UITableView with sections, custom cells, delegates.</p><p class="ru">UITableView с секциями, кастомные ячейки, делегаты.</p></div>
+      <div class="mini"><h4>Rock · Paper · Scissors</h4><p class="en">Enums with associated logic, random outcomes, animations.</p><p class="ru">Enum с логикой, случайные исходы, анимации.</p></div>
+      <div class="mini"><h4>Dice</h4><p class="en">First app: outlets, actions, image assets, randomness.</p><p class="ru">Первое приложение: аутлеты, экшены, ассеты, рандом.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">03</span><h2><span class="en">Stack</span><span class="ru">Стек</span></h2></div>
+    <div class="stack">
+      <div class="card reveal"><h4><span class="en">Language & UI</span><span class="ru">Язык и UI</span></h4><ul><li>Swift 5</li><li>UIKit</li><li>Auto Layout <small>programmatic</small></li><li>UICollectionView / UITableView</li><li>Dark Mode, Localization</li></ul></div>
+      <div class="card reveal"><h4><span class="en">Architecture</span><span class="ru">Архитектура</span></h4><ul><li>MVVM</li><li>Coordinator</li><li>Combine</li><li>Codable, GCD</li><li>Dependency injection <small>via init</small></li></ul></div>
+      <div class="card reveal"><h4><span class="en">Data & Network</span><span class="ru">Данные и сеть</span></h4><ul><li>Firebase Auth</li><li>Cloud Firestore <small>transactions</small></li><li>URLSession, REST / JSON</li><li>UserDefaults <small>typed</small></li></ul></div>
+      <div class="card reveal"><h4><span class="en">Tooling</span><span class="ru">Инструменты</span></h4><ul><li>Xcode, Simulator</li><li>XCTest</li><li>Git, GitHub</li><li>Swift Package Manager</li><li>Figma <small>reading specs</small></li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="growth">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">04</span><h2><span class="en">Where I'm heading</span><span class="ru">Куда расту</span></h2></div>
+    <p class="sec-sub en">Junior is a starting point, not a ceiling. This is the plan I'm actually following, updated as I go.</p>
+    <p class="sec-sub ru">Junior — это точка старта, а не потолок. Это план, по которому я реально иду, и я его обновляю.</p>
+    <div class="road" style="margin-top:28px">
+      <div class="card reveal"><span class="st done">done</span><ul><li>MVVM + Coordinator <span class="en">in production-style project</span><span class="ru">в проекте боевого масштаба</span></li><li>Combine <span class="en">for data flow</span><span class="ru">для потоков данных</span></li><li>Firebase Auth &amp; Firestore</li><li>XCTest <span class="en">basics, 23 tests</span><span class="ru">— основы, 23 теста</span></li><li><span class="en">Localization (3 languages)</span><span class="ru">Локализация (3 языка)</span></li></ul></div>
+      <div class="card reveal"><span class="st now">in progress</span><ul><li>SwiftUI <span class="en">— rebuilding EventHub screens</span><span class="ru">— переношу экраны EventHub</span></li><li>Swift Concurrency <span class="en">(async/await, actors)</span><span class="ru">(async/await, акторы)</span></li><li><span class="en">Clean separation: use cases &amp; repositories</span><span class="ru">Чистое разделение: use case и репозитории</span></li></ul></div>
+      <div class="card reveal"><span class="st next">next</span><ul><li>Core Data / SwiftData</li><li>CI: GitHub Actions <span class="en">build + tests on every PR</span><span class="ru">— сборка и тесты на каждый PR</span></li><li><span class="en">Snapshot &amp; UI tests</span><span class="ru">Snapshot- и UI-тесты</span></li><li>App Store <span class="en">release of my own app</span><span class="ru">— релиз своего приложения</span></li></ul></div>
+    </div>
+    <div class="goal reveal">
+      <span class="ic">→</span>
+      <p class="en"><strong>Goal for the next 12 months:</strong> <span>join a product iOS team, take ownership of a feature end-to-end, and grow into a middle developer through real code review and real users.</span></p>
+      <p class="ru"><strong>Цель на ближайшие 12 месяцев:</strong> <span>войти в продуктовую iOS-команду, взять фичу под полную ответственность и вырасти до middle через настоящее код-ревью и настоящих пользователей.</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div>
+        <div class="sec-head" style="margin-bottom:8px"><span class="num">05</span><h2><span class="en">Let's build something.</span><span class="ru">Давайте сделаем что-то вместе.</span></h2></div>
+        <p class="en">Looking for a Junior iOS Developer role or internship — Astana, remote, or relocation to Almaty. I reply within a day.</p>
+        <p class="ru">Ищу позицию Junior iOS Developer или стажировку — Астана, удалённо или переезд в Алматы. Отвечаю в течение дня.</p>
+        <div class="cta">
+          <a class="btn primary" href="mailto:dakaass@icloud.com">dakaass@icloud.com</a>
+          <a class="btn" href="resume.pdf" target="_blank" rel="noopener"><span class="en">Resume (PDF)</span><span class="ru">Резюме (PDF)</span> ↗</a>
+        </div>
+      </div>
+      <ul class="clist">
+        <li><span class="k2">github</span><a href="https://github.com/AkmaralYrzh" target="_blank" rel="noopener">github.com/AkmaralYrzh</a></li>
+        <li><span class="k2">email</span><a href="mailto:dakaass@icloud.com">dakaass@icloud.com</a></li>
+        <li><span class="k2">location</span><span>Astana, Kazakhstan</span></li>
+        <li><span class="k2">languages</span><span>KK · RU · EN (B1–B2)</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Akmaral Yerzhan · <span class="en">designed &amp; built by hand</span><span class="ru">спроектировано и собрано вручную</span></span>
+    <a href="https://github.com/AkmaralYrzh/AkmaralYrzh.github.io" target="_blank" rel="noopener"><span class="en">site source</span><span class="ru">исходник сайта</span> ↗</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var saved=null; try{saved=localStorage.getItem('lang')}catch(e){}
+  var lang=saved||((navigator.language||'').toLowerCase().indexOf('ru')===0?'ru':'en');
+  function apply(l){
+    document.body.classList.toggle('lang-ru',l==='ru');
+    document.documentElement.lang=l;
+    document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.lang===l)});
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  apply(lang);
+  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
